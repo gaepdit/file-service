@@ -76,7 +76,7 @@ public interface IFileService
         public bool Success { get; private init; } = true;
 
         public void Dispose() => Value.Dispose();
-        public async ValueTask DisposeAsync() => await Value.DisposeAsync();
+        public async ValueTask DisposeAsync() => await Value.DisposeAsync().ConfigureAwait(false);
 
         public static TryGetResponse FailedTryGetResponse => new(Stream.Null) { Success = false };
     }

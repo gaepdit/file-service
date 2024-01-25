@@ -162,7 +162,7 @@ public class FileSystemTests
         await using (var response = await _fileService.TryGetFileAsync(fileName))
         {
             // Assert
-            using var scope = new AssertionScope();
+            using var _ = new AssertionScope();
             response.Success.Should().BeTrue();
             using var ms = new MemoryStream();
             await response.Value.CopyToAsync(ms);

@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- Added `ConfigureAwait(false)` call to awaited tasks.
+
 ## [3.0.0]
 
 ### Added

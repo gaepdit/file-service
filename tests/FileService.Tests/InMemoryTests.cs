@@ -154,7 +154,8 @@ public class InMemoryTests
         // Act
         await using (var response = await _fileService.TryGetFileAsync(fileName))
         {
-            using var scope = new AssertionScope();
+            // Assert
+            using var _ = new AssertionScope();
             response.Success.Should().BeTrue();
             using var ms = new MemoryStream();
             await response.Value.CopyToAsync(ms);

@@ -14,10 +14,13 @@ public class InMemory : IFileService
     {
         Guard.NotNullOrWhiteSpace(fileName);
         if (stream.CanSeek) stream.Position = 0;
-        await using var ms = new MemoryStream(Convert.ToInt32(stream.Length));
-        await stream.CopyToAsync(ms, token);
-        _fileContainer.Add(PathTool.Combine(path, fileName),
-            new MemoryFile(ms.ToArray(), ms.Length, DateTimeOffset.UtcNow));
+        var ms = new MemoryStream(Convert.ToInt32(stream.Length));
+        await using (ms.ConfigureAwait(false))
+        {
+            await stream.CopyToAsync(ms, token).ConfigureAwait(false);
+            _fileContainer.Add(PathTool.Combine(path, fileName),
+                new MemoryFile(ms.ToArray(), ms.Length, DateTimeOffset.UtcNow));
+        }
     }
 
     public Task<bool> FileExistsAsync(string fileName, string path = "", CancellationToken token = default)

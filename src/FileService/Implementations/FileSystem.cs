@@ -60,8 +60,8 @@ public class FileSystem : IFileService
             if (!string.IsNullOrEmpty(path)) Directory.CreateDirectory(Path.Combine(_basePath, path));
             var savePath = Path.Combine(_basePath, path, fileName);
             if (stream.CanSeek) stream.Position = 0;
-            await using var fs = new FileStream(savePath, FileMode.Create);
-            await stream.CopyToAsync(fs, token);
+            var fs = new FileStream(savePath, FileMode.Create);
+            await using (fs.ConfigureAwait(false)) await stream.CopyToAsync(fs, token).ConfigureAwait(false);
         }
     }
 
