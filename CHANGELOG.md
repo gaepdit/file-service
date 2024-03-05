@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- Updated `GetFilesAsync` in the `FileSystem` implementation so that it doesn't throw an exception if the path doesn't
+  exist, making it consistent with the other implementations.
+
 ## [3.1.0]
 
 ### Changed
@@ -14,7 +21,9 @@
 
 ### Changed
 
-- **Breaking change** This release changes how paths are built when using Azure Blob Storage in order to avoid platform inconsistencies. It's possible this could result in `FileExistsAsync` and `GetFilesAsync` failing for existing files. Thorough testing is recommended when updating.
+- **Breaking change** This release changes how paths are built when using Azure Blob Storage in order to avoid platform
+  inconsistencies. It's possible this could result in `FileExistsAsync` and `GetFilesAsync` failing for existing files.
+  Thorough testing is recommended when updating.
 
 ## [2.1.0]
 

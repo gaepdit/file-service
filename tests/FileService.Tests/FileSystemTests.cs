@@ -137,7 +137,18 @@ public class FileSystemTests
         var results = _fileService.GetFilesAsync();
 
         // Assert
-        await foreach (var unused in results) Assert.Fail("`results` should be empty.");
+        await foreach (var _ in results) Assert.Fail("`results` should be empty.");
+        Assert.Pass("`results` is empty.");
+    }
+
+    [Test]
+    public async Task GetFiles_WhenPathDoesNotExist_ReturnsEmptyList()
+    {
+        // Act
+        var results = _fileService.GetFilesAsync("nope");
+
+        // Assert
+        await foreach (var _ in results) Assert.Fail("`results` should be empty.");
         Assert.Pass("`results` is empty.");
     }
 

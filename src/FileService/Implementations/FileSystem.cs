@@ -81,9 +81,11 @@ public class FileSystem : IFileService
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     {
         var fullBasePath = $"{new DirectoryInfo(_basePath).FullName}{Path.DirectorySeparatorChar}";
+        var directoryInfo = new DirectoryInfo(Path.Combine(_basePath, path));
+        if (!directoryInfo.Exists) yield break;
 
-        foreach (var fileInfo in new DirectoryInfo(Path.Combine(_basePath, path))
-                     .EnumerateFiles("*", new EnumerationOptions { RecurseSubdirectories = true }))
+        foreach (var fileInfo in directoryInfo.EnumerateFiles("*",
+                     new EnumerationOptions { RecurseSubdirectories = true }))
         {
             yield return new IFileService.FileDescription
             {

@@ -130,7 +130,7 @@ public class InMemoryTests
         var results = _fileService.GetFilesAsync();
 
         // Assert
-        await foreach (var unused in results) Assert.Fail("`results` should be empty.");
+        await foreach (var _ in results) Assert.Fail("`results` should be empty.");
         Assert.Pass("`results` is empty.");
     }
 

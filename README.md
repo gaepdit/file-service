@@ -75,7 +75,7 @@ builder.Services.AddSingleton<IFileService, InMemoryFileService>();
 ### File System
 
 The file system service writes files to a local or network drive. The `basePath` parameter is required and defines where
-the files will be stored.
+the files will be stored. If `basePath` doesn't exist, it will be created.
 
 ```csharp
 builder.Services.AddTransient<IFileService, FileSystemFileService>(_ =>
