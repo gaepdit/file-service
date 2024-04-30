@@ -61,7 +61,10 @@ public class FileSystem : IFileService
             var savePath = Path.Combine(_basePath, path, fileName);
             if (stream.CanSeek) stream.Position = 0;
             var fs = new FileStream(savePath, FileMode.Create);
-            await using (fs.ConfigureAwait(false)) await stream.CopyToAsync(fs, token).ConfigureAwait(false);
+            await using (fs.ConfigureAwait(false))
+            {
+                await stream.CopyToAsync(fs, token).ConfigureAwait(false);
+            }
         }
     }
 
