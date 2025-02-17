@@ -94,7 +94,8 @@ builder.Services.AddTransient<IFileService, FileSystemFileService>(_ =>
 The Azure Blob Storage service requires an Azure account and an existing Blob Storage container. (The service does not
 attempt to create the container if it does not exist.) The `basePath` parameter is optional and is prepended to file
 names as a path segment.
-[`DefaultAzureCredential`](https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication/?tabs=command-line#defaultazurecredential)
+[
+`DefaultAzureCredential`](https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication/?tabs=command-line#defaultazurecredential)
 is used to initialize the `BlobServiceClient`.
 
 ```csharp
@@ -102,6 +103,9 @@ builder.Services.AddSingleton<IFileService, AzureBlobFileService>(_ =>
     new AzureBlobFileService(accountName, container, basePath));
 ```
 
-**Warning:** At the moment, the `SaveFileAsync()`
-method [throws an exception](https://github.com/Azure/azure-sdk-for-net/issues/39473) when using Azure Blob Storage if
-the file already exists. 
+#### Azure Blob Storage Authentication
+
+This library uses the 
+[`DefaultAzureCredential`](https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication/?tabs=command-line#defaultazurecredential)
+class to authenticate with Azure Blob Storage. Review the documentation
+on [using developer accounts during local development](https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication/local-development-dev-accounts?tabs=azure-portal%2Csign-in-azure-powershell%2Ccommand-line).
