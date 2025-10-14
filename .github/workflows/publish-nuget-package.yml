@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write  # enable GitHub OIDC token issuanc
 
 jobs:
   publish-file-service-nuget-package:
@@ -31,10 +32,17 @@ jobs:
       - name: Build and pack
         run: dotnet build ./src/FileService/FileService.csproj --configuration Release
 
-      - name: NuGet Push
+      # Get a short-lived NuGet API key
+      - name: NuGet login (OIDC → temp API key)
         env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: dotnet nuget push .artifacts/FileService/bin/Release/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+          NUGET_USER: ${{ secrets.NUGET_USER }}
+        uses: NuGet/login@d22cc5f58ff5b88bf9bd452535b4335137e24544
+        id: login
+        with:
+          user: $NUGET_USER
+
+      - name: NuGet Push
+        run: dotnet nuget push .artifacts/FileService/bin/Release/*.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
       - name: Create GitHub Release
         uses: anton-yurchenko/git-release@ec9c5b5c36b27eaffc628785b9183eae54601200
