@@ -1,12 +1,19 @@
 ﻿using GaEpd.FileService.Implementations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Configuration;
 
 namespace GaEpd.FileService;
 
-public static class ApplicationBuilderExtensions
+public static class ServiceRegistration
 {
+    public static IHostApplicationBuilder AddFileServices(this IHostApplicationBuilder builder)
+    {
+        AddFileServices(builder.Services, builder.Configuration);
+        return builder;
+    }
+
     public static IServiceCollection AddFileServices(this IServiceCollection services, IConfiguration configuration)
     {
         var settings = new FileServiceSettings();
