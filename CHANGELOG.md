@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.2.1-beta.1] - 2025-10-20
+
+- Added an additional, simpler extension method for registering the file service: `builder.AddFileServices()`.
+
 ## [3.2.0] - 2025-01-23
 
 - Target .NET 8 and 9.
@@ -43,6 +47,7 @@
 
 _Initial release._
 
+[3.2.1-beta.1]: https://github.com/gaepdit/file-service/releases/tag/v3.2.1-beta.1
 [3.2.0]: https://github.com/gaepdit/file-service/releases/tag/v3.2.0
 [3.1.1]: https://github.com/gaepdit/file-service/releases/tag/v3.1.1
 [3.1.0]: https://github.com/gaepdit/file-service/releases/tag/v3.1.0

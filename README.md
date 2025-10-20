@@ -33,7 +33,7 @@ Alternatively, the `AddFileServices` extension method can be used to automatical
 the configuration. To do so, register the file services configuration as follows:
 
 ```csharp
-builder.Services.AddFileServices(builder.Configuration);
+builder.AddFileServices();
 ```
 
 And add the following section to your configuration:

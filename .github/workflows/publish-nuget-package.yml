@@ -6,6 +6,7 @@ on:
   push:
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+"
   workflow_dispatch:
 
 permissions:
@@ -34,12 +35,10 @@ jobs:
 
       # Get a short-lived NuGet API key
       - name: NuGet login (OIDC → temp API key)
-        env:
-          NUGET_USER: ${{ secrets.NUGET_USER }}
         uses: NuGet/login@d22cc5f58ff5b88bf9bd452535b4335137e24544
         id: login
         with:
-          user: $NUGET_USER
+          user: ${{ secrets.NUGET_USER }}
 
       - name: NuGet Push
         run: dotnet nuget push .artifacts/FileService/bin/Release/*.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate
