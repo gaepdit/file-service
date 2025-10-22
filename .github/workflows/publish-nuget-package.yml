@@ -11,7 +11,7 @@ on:
 
 permissions:
   contents: write
-  id-token: write  # enable GitHub OIDC token issuanc
+  id-token: write # enable GitHub OIDC token issuance
 
 jobs:
   publish-file-service-nuget-package:
