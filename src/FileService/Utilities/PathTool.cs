@@ -1,11 +1,11 @@
-﻿// ReSharper disable ConvertIfStatementToReturnStatement
-
+﻿
 namespace GaEpd.FileService.Utilities;
 
 public static class PathTool
 {
     private const string DirectorySeparator = "/";
 
+    // ReSharper disable once ConvertIfStatementToReturnStatement
     public static string Combine(string first, string second, string third = "")
     {
         if (string.IsNullOrEmpty(first)) return CombineInternal(second, third);
