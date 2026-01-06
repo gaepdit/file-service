@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/FileService/FileService.csproj" />
+  <Project Path="tests/FileService.Tests/FileService.Tests.csproj" />
+</Solution>
