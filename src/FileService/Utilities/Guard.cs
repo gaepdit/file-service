@@ -2,11 +2,12 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace GaEpd.FileService;
+namespace GaEpd.FileService.Utilities;
 
 [DebuggerStepThrough]
 public static class Guard
 {
+    // ReSharper disable once ConvertIfStatementToReturnStatement
     public static string NotNullOrWhiteSpace([NotNull] string? value,
         [CallerArgumentExpression("value")] string? parameterName = null)
     {
