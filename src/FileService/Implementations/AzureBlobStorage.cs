@@ -46,7 +46,7 @@ public class AzureBlobStorage : IFileService
         [EnumeratorCancellation] CancellationToken token = default)
     {
         var blobItems = _containerClient.GetBlobsAsync(
-                prefix: PathTool.CombineWithDirectorySeparator(_basePath, path),
+                new GetBlobsOptions { Prefix = PathTool.CombineWithDirectorySeparator(_basePath, path) },
                 cancellationToken: token)
             .ConfigureAwait(false);
 
