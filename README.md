@@ -47,6 +47,7 @@ And add the following section to your configuration:
     "NetworkDomain": "",
     "NetworkPassword": "",
     "AzureAccountName": "",
+    "AzureTenantId": "",
     "BlobContainer": "",
     "BlobBasePath": ""
   }
@@ -60,8 +61,8 @@ The `FileService` setting must be set to `InMemory`, `FileSystem`, or `AzureBlob
 * If `FileSystem` is chosen, then `FileSystemBasePath` is required, and `NetworkUsername`, `NetworkDomain`,
   and `NetworkPassword` can be provided if needed. Other settings are ignored.
 
-* If `AzureBlobStorage` is chosen, then `AzureAccountName` and `BlobContainer` are required, and `BlobBasePath` can be
-  provided if desired. Other settings are ignored.
+* If `AzureBlobStorage` is chosen, then `AzureAccountName` and `BlobContainer` are required, and `BlobBasePath` and
+  `AzureTenantId` can be provided if needed. Other settings are ignored.
 
 ### In Memory
 
@@ -94,18 +95,19 @@ builder.Services.AddTransient<IFileService, FileSystemFileService>(_ =>
 The Azure Blob Storage service requires an Azure account and an existing Blob Storage container. (The service does not
 attempt to create the container if it does not exist.) The `basePath` parameter is optional and is prepended to file
 names as a path segment.
-[
-`DefaultAzureCredential`](https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication/?tabs=command-line#defaultazurecredential)
-is used to initialize the `BlobServiceClient`.
+
+The `tenantId` parameter is also optional and specifies the ID of the tenant to which the
+credential will authenticate by default. (This is useful in multi-tenant situations where the desired Tenant ID is not
+the default.)
 
 ```csharp
 builder.Services.AddSingleton<IFileService, AzureBlobFileService>(_ =>
-    new AzureBlobFileService(accountName, container, basePath));
+    new AzureBlobFileService(accountName, container, basePath, tenantId));
 ```
 
 #### Azure Blob Storage Authentication
 
-This library uses the 
+This library uses the
 [`DefaultAzureCredential`](https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication/?tabs=command-line#defaultazurecredential)
 class to authenticate with Azure Blob Storage. Review the documentation
 on [using developer accounts during local development](https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication/local-development-dev-accounts?tabs=azure-portal%2Csign-in-azure-powershell%2Ccommand-line).

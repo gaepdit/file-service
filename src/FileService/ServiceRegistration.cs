@@ -10,7 +10,7 @@ public static class ServiceRegistration
 {
     public static IHostApplicationBuilder AddFileServices(this IHostApplicationBuilder builder)
     {
-        AddFileServices(builder.Services, builder.Configuration);
+        builder.Services.AddFileServices(builder.Configuration);
         return builder;
     }
 
@@ -52,7 +52,8 @@ public static class ServiceRegistration
                         "The Azure account name and blob storage container name must be supplied when using the Azure Blob Storage implementation.");
 
                 services.AddSingleton<IFileService, AzureBlobStorage>(_ =>
-                    new AzureBlobStorage(settings.AzureAccountName, settings.BlobContainer, settings.BlobBasePath));
+                    new AzureBlobStorage(settings.AzureAccountName, settings.BlobContainer, settings.BlobBasePath,
+                        settings.AzureTenantId));
 
                 break;
 

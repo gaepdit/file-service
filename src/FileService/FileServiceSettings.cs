@@ -23,6 +23,7 @@ public sealed class FileServiceSettings
 
     // Azure Blob Storage parameters
     public string AzureAccountName { get; init; } = string.Empty;
+    public string AzureTenantId { get; init; } = string.Empty;
     public string BlobContainer { get; init; } = string.Empty;
     public string BlobBasePath { get; init; } = string.Empty;
 }
