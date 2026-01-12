@@ -16,14 +16,18 @@ public class AzureBlobStorage : IFileService
     /// </summary>
     /// <param name="accountName">The Azure storage account name.</param>
     /// <param name="container">The blob storage container.</param>
-    /// <param name="basePath">An optional path defining where the files will be stored within the container.</param>
-    public AzureBlobStorage(string accountName, string container, string basePath = "")
+    /// <param name="basePath">(Optional) A path defining where the files will be stored within the container.</param>
+    /// <param name="tenantId">(Optional) The Azure Tenant ID.</param>
+    public AzureBlobStorage(string accountName, string container, string basePath = "", string? tenantId = null)
     {
         Guard.NotNullOrWhiteSpace(accountName);
         Guard.NotNullOrWhiteSpace(container);
         _basePath = basePath;
         var serviceUri = new Uri($"https://{accountName}.blob.core.windows.net");
-        var serviceClient = new BlobServiceClient(serviceUri, new DefaultAzureCredential());
+        var credential = string.IsNullOrEmpty(tenantId)
+            ? new DefaultAzureCredential()
+            : new DefaultAzureCredential(new DefaultAzureCredentialOptions { TenantId = tenantId });
+        var serviceClient = new BlobServiceClient(serviceUri, credential);
         _containerClient = serviceClient.GetBlobContainerClient(container);
     }
 
