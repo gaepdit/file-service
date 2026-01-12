@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.3.1] - 2026-01-12
+
+- Enabled setting the Tenant ID when using Azure Blob Storage.
+
 ## [3.3.0] - 2026-01-06
 
 - Added support for .NET 10.
@@ -65,3 +69,4 @@ _Initial release._
 [3.2.1-beta.1]: https://github.com/gaepdit/file-service/releases/tag/v3.2.1-beta.1
 [3.2.1]: https://github.com/gaepdit/file-service/releases/tag/v3.2.1
 [3.3.0]: https://github.com/gaepdit/file-service/releases/tag/v3.3.0
+[3.3.1]: https://github.com/gaepdit/file-service/releases/tag/v3.3.1
