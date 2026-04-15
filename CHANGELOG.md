@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.3.2] - 2026-04-15
+
+- Updated NuGet packages.
+
 ## [3.3.1] - 2026-01-12
 
 - Enabled setting the Tenant ID when using Azure Blob Storage.
@@ -70,3 +74,4 @@ _Initial release._
 [3.2.1]: https://github.com/gaepdit/file-service/releases/tag/v3.2.1
 [3.3.0]: https://github.com/gaepdit/file-service/releases/tag/v3.3.0
 [3.3.1]: https://github.com/gaepdit/file-service/releases/tag/v3.3.1
+[3.3.2]: https://github.com/gaepdit/file-service/releases/tag/v3.3.2
