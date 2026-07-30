@@ -30,7 +30,8 @@ public class InMemory : IFileService
     }
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-    public async IAsyncEnumerable<IFileService.FileDescription> GetFilesAsync(string path = "",
+    // ReSharper disable once AsyncMethodWithoutAwait
+    public async IAsyncEnumerable<IFileService.FileDescription> ListFilesAsync(string path = "",
         [EnumeratorCancellation] CancellationToken token = default)
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     {
@@ -44,6 +45,9 @@ public class InMemory : IFileService
             };
         }
     }
+
+    public IAsyncEnumerable<IFileService.FileDescription> GetFilesAsync(string path = "",
+        CancellationToken token = default) => ListFilesAsync(path, token);
 
     public Task<Stream> GetFileAsync(string fileName, string path = "", CancellationToken token = default)
     {

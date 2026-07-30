@@ -1,5 +1,11 @@
 # Changelog
 
+## Next
+
+- Renamed `GetFilesAsync` to `ListFilesAsync`. (`GetFilesAsync` is still available as an alias, but it's marked
+  "Obsolete" and will be removed in a future version.)
+- Marked the `services.AddFileServices(configuration)` overload as "Obsolete". Use `builder.AddFileServices()` instead.
+
 ## [3.3.3] - 2026-07-21
 
 - Updated NuGet packages.
