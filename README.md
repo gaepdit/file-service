@@ -21,7 +21,7 @@ An `IFileService` interface is used to abstract out common file persistence oper
 
 * `SaveFileAsync`
 * `FileExistsAsync`
-* `GetFilesAsync`
+* `ListFilesAsync`
 * `GetFileAsync`
 * `TryGetFileAsync`
 * `DeleteFileAsync`

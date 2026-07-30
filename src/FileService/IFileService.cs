@@ -31,6 +31,9 @@ public interface IFileService
     /// <param name="token"><see cref="T:System.Threading.CancellationToken"/></param>
     /// <returns>An <see cref="IAsyncEnumerable{FileDescription}"/> collection of files in the specified path.
     /// If no files exist in the specified path, returns an empty collection.</returns>
+    IAsyncEnumerable<FileDescription> ListFilesAsync(string path = "", CancellationToken token = default);
+
+    [Obsolete("This method has been renamed. Use `ListFilesAsync` instead.")]
     IAsyncEnumerable<FileDescription> GetFilesAsync(string path = "", CancellationToken token = default);
 
     /// <summary>

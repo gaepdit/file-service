@@ -46,7 +46,7 @@ public class AzureBlobStorage : IFileService
         return (await blobClient.ExistsAsync(token).ConfigureAwait(false)).Value;
     }
 
-    public async IAsyncEnumerable<IFileService.FileDescription> GetFilesAsync(string path = "",
+    public async IAsyncEnumerable<IFileService.FileDescription> ListFilesAsync(string path = "",
         [EnumeratorCancellation] CancellationToken token = default)
     {
         var blobItems = _containerClient.GetBlobsAsync(
@@ -64,6 +64,9 @@ public class AzureBlobStorage : IFileService
             };
         }
     }
+
+    public IAsyncEnumerable<IFileService.FileDescription> GetFilesAsync(string path = "",
+        CancellationToken token = default) => ListFilesAsync(path, token);
 
     public async Task<Stream> GetFileAsync(string fileName, string path = "", CancellationToken token = default)
     {

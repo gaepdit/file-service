@@ -1,5 +1,10 @@
 # Changelog
 
+## Next
+
+- Renamed `GetFilesAsync` to `ListFilesAsync`. (`GetFilesAsync` is still available as an alias, but it's marked
+  "Obsolete" and will be removed in a future version.)
+
 ## [3.3.3] - 2026-07-21
 
 - Updated NuGet packages.

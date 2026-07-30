@@ -60,7 +60,7 @@ public class InMemoryTests
         const string searchPath = "searchPath";
         const string ignorePath = "ignorePath";
 
-        // In FileSystem, `GetFilesAsync` returns files in alphabetical order, so this naming makes the assertions simpler.
+        // In FileSystem, `ListFilesAsync` returns files in alphabetical order, so this naming makes the assertions simpler.
         // (In InMemory, files are returned in the order added, so naming doesn't matter.)
         var files = new List<(string path, string fileName)>
         {
@@ -75,7 +75,7 @@ public class InMemoryTests
 
         // Act
         // -- Only find files starting with `searchPath`.
-        var results = _fileService.GetFilesAsync(searchPath);
+        var results = _fileService.ListFilesAsync(searchPath);
 
         // Assert
         var i = 0;
@@ -95,7 +95,7 @@ public class InMemoryTests
         const string searchPath = "searchPath";
         const string nestedPath = "nestedPath";
 
-        // In FileSystem, `GetFilesAsync` returns files in alphabetical order, so this naming makes the assertions simpler.
+        // In FileSystem, `ListFilesAsync` returns files in alphabetical order, so this naming makes the assertions simpler.
         // (In InMemory, files are returned in the order added, so naming doesn't matter.)
         var files = new List<(string path, string fileName)>
         {
@@ -110,7 +110,7 @@ public class InMemoryTests
 
         // Act
         // -- Only find files starting with `searchPath`.
-        var results = _fileService.GetFilesAsync(searchPath);
+        var results = _fileService.ListFilesAsync(searchPath);
 
         // Assert
         var i = 0;
@@ -127,7 +127,7 @@ public class InMemoryTests
     public async Task GetFiles_WhenFileDoesNotExist_ReturnsEmptyList()
     {
         // Act
-        var results = _fileService.GetFilesAsync();
+        var results = _fileService.ListFilesAsync();
 
         // Assert
         await foreach (var _ in results) Assert.Fail("`results` should be empty.");
