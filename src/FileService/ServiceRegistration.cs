@@ -10,11 +10,16 @@ public static class ServiceRegistration
 {
     public static IHostApplicationBuilder AddFileServices(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddFileServices(builder.Configuration);
+        builder.Services.AddFileServicesInternal(builder.Configuration);
         return builder;
     }
 
-    public static IServiceCollection AddFileServices(this IServiceCollection services, IConfiguration configuration)
+    [Obsolete("Use builder.AddFileServices(); instead. This method will be removed in a future update.")]
+    public static IServiceCollection AddFileServices(this IServiceCollection services, IConfiguration configuration) =>
+        services.AddFileServicesInternal(configuration);
+
+    private static IServiceCollection AddFileServicesInternal(this IServiceCollection services,
+        IConfiguration configuration)
     {
         var settings = new FileServiceSettings();
         configuration.GetSection(nameof(FileServiceSettings)).Bind(settings);
