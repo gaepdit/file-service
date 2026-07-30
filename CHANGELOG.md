@@ -1,9 +1,10 @@
 # Changelog
 
-## Next
+## [3.4.0] - 2026-07-30
 
 - Renamed `GetFilesAsync` to `ListFilesAsync`. (`GetFilesAsync` is still available as an alias, but it's marked
   "Obsolete" and will be removed in a future version.)
+
 - Marked the `services.AddFileServices(configuration)` overload as "Obsolete". Use `builder.AddFileServices()` instead.
 
 ## [3.3.3] - 2026-07-21
@@ -81,3 +82,4 @@ _Initial release._
 [3.3.1]: https://github.com/gaepdit/file-service/releases/tag/v3.3.1
 [3.3.2]: https://github.com/gaepdit/file-service/releases/tag/v3.3.2
 [3.3.3]: https://github.com/gaepdit/file-service/releases/tag/v3.3.3
+[3.4.0]: https://github.com/gaepdit/file-service/releases/tag/v3.4.0
