@@ -15,7 +15,7 @@ To install, search for "GaEpd.FileService" in the NuGet package manager or run t
 
 `dotnet add package GaEpd.FileService`
 
-## Usage
+## Interface
 
 An `IFileService` interface is used to abstract out common file persistence operations:
 
@@ -26,17 +26,21 @@ An `IFileService` interface is used to abstract out common file persistence oper
 * `TryGetFileAsync`
 * `DeleteFileAsync`
 
-The library also includes three useful implementations, In Memory, File System, and Azure Blob Storage. Each
-implementation can be registered independently as shown in the sections below.
+## Implementations
 
-Alternatively, the `AddFileServices` extension method can be used to automatically register an implementation based on
-the configuration. To do so, register the file services configuration as follows:
+The library includes three useful File Service implementations that store files in memory, the file system, or Azure
+Blob Storage. A description of each implementation and its parameters is below.
+
+### Registration
+
+The simplest way to register one of the implementations is to use the `AddFileServices()` extension method and configure
+the desired implementation in the app configuration. Add the following line to your Program file:
 
 ```csharp
 builder.AddFileServices();
 ```
 
-And add the following section to your configuration:
+And add the following section to your `appsettings.json` configuration file:
 
 ```json
 {
@@ -54,40 +58,42 @@ And add the following section to your configuration:
 }
 ```
 
-The `FileService` setting must be set to `InMemory`, `FileSystem`, or `AzureBlobStorage`.
+The `FileService` setting must be included and must be set to either `InMemory`, `FileSystem`, or `AzureBlobStorage`.
+Other settings only need to be included if required by the selected implementation.
 
-* If `InMemory` is chosen, all other settings are ignored.
+* If `InMemory` is chosen, all other settings are ignored and can be left out.
 
-* If `FileSystem` is chosen, then `FileSystemBasePath` is required, and `NetworkUsername`, `NetworkDomain`,
-  and `NetworkPassword` can be provided if needed. Other settings are ignored.
+* If `FileSystem` is chosen, then `FileSystemBasePath` is required. `NetworkUsername`, `NetworkDomain`, and
+  `NetworkPassword` can be provided if needed. Other settings are ignored.
 
-* If `AzureBlobStorage` is chosen, then `AzureAccountName` and `BlobContainer` are required, and `BlobBasePath` and
+* If `AzureBlobStorage` is chosen, then `AzureAccountName` and `BlobContainer` are required. `BlobBasePath` and
   `AzureTenantId` can be provided if needed. Other settings are ignored.
+
+Alternatively, you can directly register one of the implementations as shown in the sections below.
 
 ### In Memory
 
-The in-memory file service implementation stores files in memory.
+The in-memory implementation stores files in memory. All data will be lost when the app restarts (only useful for
+development).
 
 ```csharp
-builder.Services.AddSingleton<IFileService, InMemoryFileService>();
+builder.Services.AddSingleton<IFileService, InMemory>();
 ```
 
 ### File System
 
-The file system service writes files to a local or network drive. The `basePath` parameter is required and defines where
-the files will be stored. If `basePath` doesn't exist, it will be created.
+The file system implementation writes files to a local or network drive. The `basePath` parameter is required and
+defines where the files will be stored. If `basePath` doesn't exist in the file system, it will be created.
 
 ```csharp
-builder.Services.AddTransient<IFileService, FileSystemFileService>(_ =>
-    new FileSystemFileService(basePath));
+builder.Services.AddTransient<IFileService, FileSystem>(_ => new FileSystem(basePath));
 ```
 
-If a Windows Identity is required to access the desired file location, use the overload that
-accepts `username`, `domain`, and `password` parameters in the constructor.
+If a Windows Identity is required to access the desired file location, use the overload that accepts `username`,
+`domain`, and `password` parameters in the constructor.
 
 ```csharp
-builder.Services.AddTransient<IFileService, FileSystemFileService>(_ =>
-    new FileSystemFileService(basePath, username, domain, password));
+builder.Services.AddTransient<IFileService, FileSystem>(_ => new FileSystem(basePath, username, domain, password));
 ```
 
 ### Azure Blob Storage
@@ -96,13 +102,11 @@ The Azure Blob Storage service requires an Azure account and an existing Blob St
 attempt to create the container if it does not exist.) The `basePath` parameter is optional and is prepended to file
 names as a path segment.
 
-The `tenantId` parameter is also optional and specifies the ID of the tenant to which the
-credential will authenticate by default. (This is useful in multi-tenant situations where the desired Tenant ID is not
-the default.)
+The `tenantId` parameter is also optional and specifies the ID of the tenant to which the credential will authenticate
+by default. (This is useful in multi-tenant situations where the desired Tenant ID is not the default.)
 
 ```csharp
-builder.Services.AddSingleton<IFileService, AzureBlobFileService>(_ =>
-    new AzureBlobFileService(accountName, container, basePath, tenantId));
+builder.Services.AddSingleton<IFileService, AzureBlobStorage>(_ => new AzureBlobStorage(accountName, container, basePath, tenantId));
 ```
 
 #### Azure Blob Storage Authentication
