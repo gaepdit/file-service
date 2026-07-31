@@ -61,7 +61,7 @@ public class FileSystemTests
     }
 
     [Test]
-    public async Task GetFiles_WhenFilesExist_ReturnsList()
+    public async Task ListFiles_WhenFilesExist_ReturnsList()
     {
         // Arrange
         const string searchPath = "searchPath";
@@ -96,7 +96,7 @@ public class FileSystemTests
     }
 
     [Test]
-    public async Task GetFiles_WhenFilesExistInSubfolders_RecursivelyReturnsList()
+    public async Task ListFiles_WhenFilesExistInSubfolders_RecursivelyReturnsList()
     {
         // Arrange
         const string searchPath = "searchPath";
@@ -131,7 +131,7 @@ public class FileSystemTests
     }
 
     [Test]
-    public async Task GetFiles_WhenFileDoesNotExist_ReturnsEmptyList()
+    public async Task ListFiles_WhenFileDoesNotExist_ReturnsEmptyList()
     {
         // Act
         var results = _fileService.ListFilesAsync();
@@ -142,7 +142,7 @@ public class FileSystemTests
     }
 
     [Test]
-    public async Task GetFiles_WhenPathDoesNotExist_ReturnsEmptyList()
+    public async Task ListFiles_WhenPathDoesNotExist_ReturnsEmptyList()
     {
         // Act
         var results = _fileService.ListFilesAsync("nope");
