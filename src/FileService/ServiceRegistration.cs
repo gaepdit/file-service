@@ -14,11 +14,7 @@ public static class ServiceRegistration
         return builder;
     }
 
-    [Obsolete("Use builder.AddFileServices(); instead. This method will be removed in a future update.")]
-    public static IServiceCollection AddFileServices(this IServiceCollection services, IConfiguration configuration) =>
-        services.AddFileServicesInternal(configuration);
-
-    private static IServiceCollection AddFileServicesInternal(this IServiceCollection services,
+    private static void AddFileServicesInternal(this IServiceCollection services,
         IConfiguration configuration)
     {
         var settings = new FileServiceSettings();
@@ -66,7 +62,5 @@ public static class ServiceRegistration
                 throw new ConfigurationErrorsException(
                     "The File Service configuration must be set to 'InMemory', 'FileSystem', or 'AzureBlobStorage'.");
         }
-
-        return services;
     }
 }
