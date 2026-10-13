@@ -65,9 +65,6 @@ public class AzureBlobStorage : IFileService
         }
     }
 
-    public IAsyncEnumerable<IFileService.FileDescription> GetFilesAsync(string path = "",
-        CancellationToken token = default) => ListFilesAsync(path, token);
-
     public async Task<Stream> GetFileAsync(string fileName, string path = "", CancellationToken token = default)
     {
         Guard.NotNullOrWhiteSpace(fileName);

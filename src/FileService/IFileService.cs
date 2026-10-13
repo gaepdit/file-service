@@ -33,9 +33,6 @@ public interface IFileService
     /// If no files exist in the specified path, returns an empty collection.</returns>
     IAsyncEnumerable<FileDescription> ListFilesAsync(string path = "", CancellationToken token = default);
 
-    [Obsolete("This method has been renamed. Use `ListFilesAsync` instead.")]
-    IAsyncEnumerable<FileDescription> GetFilesAsync(string path = "", CancellationToken token = default);
-
     /// <summary>
     /// Retrieves a file as a <see cref="Stream"/>.
     /// </summary>
