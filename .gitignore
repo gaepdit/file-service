@@ -533,9 +533,8 @@ FodyWeavers.xsd
 ########################
 ### Project-specific ###
 
-# SonarLint Rider plugin
-.idea/**/sonarlint/
-.idea/**/sonarlint-state.xml
+# Jetbrains settings folder
+.idea/
 
 ## Build artifacts
 _artifacts/
