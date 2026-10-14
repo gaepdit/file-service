@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.5.0] - 2026-10-14
+
+- Updated dependencies.
+- **Breaking change:** Removed obsolete methods from v3.4.0.
+
 ## [3.4.0] - 2026-07-30
 
 - Renamed `GetFilesAsync` to `ListFilesAsync`. (`GetFilesAsync` is still available as an alias, but it's marked
@@ -83,3 +88,4 @@ _Initial release._
 [3.3.2]: https://github.com/gaepdit/file-service/releases/tag/v3.3.2
 [3.3.3]: https://github.com/gaepdit/file-service/releases/tag/v3.3.3
 [3.4.0]: https://github.com/gaepdit/file-service/releases/tag/v3.4.0
+[3.5.0]: https://github.com/gaepdit/file-service/releases/tag/v3.5.0
